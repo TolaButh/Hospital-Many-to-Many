@@ -1,0 +1,126 @@
+{% extends 'layout.html' %}
+{% block title %}{{title}}{% endblock  %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center">
+        {{title}}
+        </h1>
+        <hr>
+        {% if patients %}
+        <div >
+          <form action="{{url_for('add_patient')}}" method="POST">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Patient Name</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name">
+                
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Patient Insurance Number</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="insurance_num">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Patient Sick</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="sick">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
+      </div>
+        
+        
+      <br>
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Patient Name</th>
+              <th scope="col">Patient Insurce Number</th>
+              <th scope="col">Patient Sick</th>
+              <th scope="col">Action</th>
+             
+            </tr>
+          </thead>
+          <tbody>
+
+              {% for patient in patients %}
+            <tr>
+              <th scope="row">{{patient.id}}</th>
+              <td>{{patient.name}}</td>
+              <td>{{patient.insurance_num}}</td>
+              <td>{{patient.sick}}</td>
+              <td>
+                  <a href="{{url_for("edit_patient", id = patient.id)}}" class="btn btn-outline-success">Edit</a>
+                  <a href="{{url_for("detail_patient", id = patient.id)}}" class="btn btn-outline-secondary">Detail</a>
+              </td>
+              
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+  </div>
+<br><br><br> 
+
+
+        {% else %}
+
+
+        <div >
+          <form action="{{url_for("edit_patient", id = patient.id)}}" method="POST">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Patient Name</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name" value="{{patient.name}}">
+                
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword3" class="form-label">Patient Insuracne Number</label>
+                <input type="text" class="form-control" id="exampleInputPassword3" name="insurance_num" value="{{patient.insurance_num}}">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword2" class="form-label">Patient Sick</label>
+                <input type="text" class="form-control" id="exampleInputPassword2" name="sick" value="{{patient.sick}}">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
+      </div>
+      <br>
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Patient Name</th>
+              <th scope="col">Patient Insurance Number</th>
+              <th scope="col">Patient Sick</th>
+              <th scope="col">Action</th>
+             
+            </tr>
+          </thead>
+          <tbody>
+
+              {% for patient in pat %}
+            <tr>
+                <th scope="row">{{patient.id}}</th>
+                <td>{{patient.name}}</td>
+                <td>{{patient.insurance_num}}</td>
+                <td>{{patient.sick}}</td>
+              <td>
+                  <a href="{{url_for("edit_patient",id=patient.id)}}" class="btn btn-outline-success">Edit</a>
+                  <a href="{{url_for("detail_patient", id = patient.id)}}" class="btn btn-outline-secondary">Detail</a>
+              </td>
+              
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+  </div>
+<br><br><br>  
+
+
+        {% endif %}
+
+        
+       
+
+{% endblock  %}

@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+{% block title %}{{title}}{% endblock  %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center text-primary">{{d.name}}</h1>
+        <hr>
+        <br>
+        <table class="table">
+            <thead>
+              <tr class="text-primary">
+                <th>NO</th>
+                <th>Insurce Number</th>
+                <th>Patient Name</th>
+                <th>Patient Sick</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for d1 in d.patients.all() %}
+                {% if d.patients.all() %}
+                <tr class="text-success">
+                    <td>{{d1.id}}</td>
+                    <td>{{d1.insurance_num}}</td>
+                    <td>{{d1.name}}</td>
+                    <td>{{d1.sick}}</td>
+                  </tr>
+                {% else %}
+                <tr>
+                <td>No Data</td>
+                </tr>
+                {% endif %}
+                
+
+
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+
+
+
+
+       
+
+{% endblock  %}

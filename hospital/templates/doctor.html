@@ -1,0 +1,113 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{title}}{% endblock  %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center">
+        {{title}}
+        </h1>
+        <hr>
+        {% if doctors %}
+        <div >
+          <form action="{{url_for('add_doctor')}}" method="POST">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Doctor Name</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name">
+                
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Doctor Specialization</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="specialization">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
+      </div>
+        
+        
+      <br>
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Doctor Name</th>
+              <th scope="col">Doctor Specialization</th>
+              <th scope="col">Action</th>
+             
+            </tr>
+          </thead>
+          <tbody>
+
+              {% for doctor in doctors %}
+            <tr>
+              <th scope="row">{{doctor.id}}</th>
+              <td>{{doctor.name}}</td>
+              <td>{{doctor.specialization}}</td>
+              <td>
+                  <a href="{{url_for("edit_doctor",id=doctor.id)}}" class="btn btn-outline-success">Edit</a>
+                  <a href="{{url_for("detail_doctor", id = doctor.id)}}" class="btn btn-outline-secondary">Detail</a>
+              </td>
+              
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+  </div>
+<br><br><br> 
+
+
+        {% else %}
+        <div >
+          <form action="{{url_for("edit_doctor", id = doc.id)}}" method="POST">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Doctor </label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name" value="{{doc.name}}">
+                
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Doctor Specialization</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="specialization" value="{{doc.specialization}}">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
+      </div>
+      <br>
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Doctor Name</th>
+              <th scope="col">Doctor Specialization</th>
+              <th scope="col">Action</th>
+             
+            </tr>
+          </thead>
+          <tbody>
+
+              {% for doctor in doct %}
+            <tr>
+              <th scope="row">{{doctor.id}}</th>
+              <td>{{doctor.name}}</td>
+              <td>{{doctor.specialization}}</td>
+              <td>
+                  <a href="{{url_for("edit_doctor",id=doctor.id)}}" class="btn btn-outline-success">Edit</a>
+                  <a href="{{url_for("detail_doctor", id = doctor.id)}}" class="btn btn-outline-secondary">Detail</a>
+              </td>
+              
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+  </div>
+<br><br><br>  
+
+
+        {% endif %}
+
+        
+       
+
+{% endblock  %}

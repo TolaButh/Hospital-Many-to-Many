@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% block title %}{{title}}{% endblock  %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center">
+        {{title}}
+    </h1>
+    <hr>
+
+    <div >
+        <form action="{{url_for('rigistration')}}" method="POST">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Doctor Name</label>
+              <select class="form-select" aria-label="Default select example" name="doctor_name" >
+               
+               {% for doctor in doctors %}
+               <option  value="{{doctor.name}}">{{doctor.name}}</option>
+               
+               {% endfor %}
+              </select>
+              
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Patient Number</label>
+              <select class="form-select" aria-label="Default select example" name="patient_name" >
+               
+                {% for patient in patientes %}
+                <option  value="{{patient.name}}">{{patient.name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+           
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+          </form>
+    </div>
+</div>
+
+{% endblock  %}
